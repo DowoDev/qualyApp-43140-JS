@@ -305,7 +305,8 @@ function cargarDatos(url, isClasificacion) {
 
       datos.forEach(item => {
         let imgPiloto = `./assets/img/${item.Driver.permanentNumber}.png`;
-        let imgMiniatura = `<div id=info"></div><img src="${imgPiloto}" alt="Imagen del piloto" class="imagenPiloto" id="imgModal">`;
+        let imgMiniatura = `<div id=info"></div><button class="button btn-info">
+        <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ededed}</style><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 256h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>INFO</button><img src="${imgPiloto}" alt="Imagen del piloto" class="imagenPiloto" id="imgModal">`;
 
         let fila = document.createElement("tr");
         let tiempo = isClasificacion ? [item.Q1 || '', item.Q2 || '', item.Q3 || ''] : [item.Time ? item.Time.time : '', item.status || ''];
@@ -329,6 +330,122 @@ function cargarDatos(url, isClasificacion) {
       const tablaContenedor = document.getElementById("tablaContenedor");
       tablaContenedor.style.display = "block";
       tablaContenedor.style.marginTop = "20px";
+      
+      const pilotosJson = 'https://raw.githubusercontent.com/DowoDev/qinquela-43140-JS/main/js/pilotos.json';
+
+      // Función para obtener los datos y procesarlos
+      async function fetchDataPilotos() {
+        try {
+          const respuesta = await fetch(pilotosJson);
+          const datos = await respuesta.json();
+      
+          const tarjetas = datos.MRData.DriverTable.Drivers;
+      
+          let datosExtraidos = tarjetas.map(piloto => ({
+            permanentNumber: piloto.permanentNumber,
+            givenName: piloto.givenName,
+            familyName: piloto.familyName,
+            country: piloto.country,
+            countryPic: piloto.countryPic,
+            grands_prix_entered: piloto.grands_prix_entered,
+            world_championships: piloto.world_championships,
+            podiums: piloto.podiums,
+            career_points: piloto.career_points,
+            Constructors_Carreer: piloto.season,
+            Constructor_name: piloto.name,
+            logo: piloto.logo,
+            pic: piloto.pic,
+            picNumber: piloto.picNumber,
+            season: piloto.season,
+            races_won: piloto.races_won,
+          }));
+      
+          return datosExtraidos;
+        } catch (error) {
+          console.error('Error al extraer los datos:', error);
+          return [];
+        }
+      }
+
+      // Llamar a la función y obtener los datos
+      fetchDataPilotos().then(data => {
+        console.log(data);
+      
+        // Agregar un manejador de eventos a los botones "INFO"
+        let infoPiloto = document.getElementsByClassName("btn-info");
+        for (let index = 0; index < infoPiloto.length; index++) {
+          infoPiloto[index].addEventListener("click", () => {
+            const pilotoData = data[index];
+            console.log(pilotoData) // Obtener los datos del piloto correspondiente
+            mostrarTarjetaPiloto(pilotoData); // Llamar a la función para mostrar la tarjeta
+          });
+        }
+      });
+      
+      // Función para mostrar la tarjeta del piloto
+      function mostrarTarjetaPiloto(pilotoData) {
+        const overlayContainer = document.createElement("div");
+        overlayContainer.classList.add("overlayContainer");
+        overlayContainer.style.display = "block";
+
+        const cardContainer = document.createElement("div");
+        cardContainer.classList.add("card-container");
+
+        const closeBtn = document.createElement("button");
+        closeBtn.classList.add("close-btn");
+        closeBtn.textContent = "CERRAR";
+        closeBtn.addEventListener("click", () => {
+          overlayContainer.style.display = "none";
+          cardContainer.remove();
+        });
+
+        const permanentNumber = pilotoData.permanentNumber;
+
+        const pilotoImg = document.createElement("img");
+        pilotoImg.className = "pilotoImg";
+        pilotoImg.src = pilotoData.pic;
+        pilotoImg.alt = pilotoData.givenName + " " + pilotoData.familyName;
+
+        const pilotoName = document.createElement("h2");
+        pilotoName.textContent = pilotoData.givenName + " " + pilotoData.familyName;
+
+        const pilotoNumber = document.createElement("img");
+        pilotoNumber.className = "pilotoNumber";
+        pilotoNumber.src = pilotoData.picNumber;
+
+        const countryImg = document.createElement("img");
+        countryImg.className = "countryImg";
+        countryImg.src = pilotoData.countryPic;
+        countryImg.alt = pilotoData.country;
+
+        const constructorName = document.createElement("p");
+        constructorName.textContent = "Constructor:" + pilotoData.Constructor_name;
+
+        const season = document.createElement("p");
+        season.textContent = "Temporada: " + pilotoData.season;
+
+        const racesWon = document.createElement("p");
+        racesWon.textContent = "Carreras ganadas: " + pilotoData.races_won;
+
+        const championships = document.createElement("p");
+        championships.textContent = "Campeonatos: " + pilotoData.world_championships;
+
+        document.body.appendChild(overlayContainer);
+        document.body.appendChild(cardContainer);
+        cardContainer.appendChild(closeBtn);
+        cardContainer.appendChild(pilotoImg);
+        cardContainer.appendChild(pilotoName);
+        cardContainer.appendChild(pilotoNumber);
+        cardContainer.appendChild(countryImg);
+        cardContainer.appendChild(constructorName);
+        cardContainer.appendChild(season);
+        cardContainer.appendChild(racesWon);
+        cardContainer.appendChild(championships);
+
+      
+   
+      }
+      
 
       Toastify({
         text: "LOS DATOS SOLICITADOS HAN SIDO CARGADOS EXITOSAMENTE",
