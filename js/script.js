@@ -70,7 +70,7 @@ function cargarOpcionesSelector() {
 
   selector.appendChild(optionPlaceholder);
 
-  fetch("http://ergast.com/api/f1/2023.json")
+  fetch("https://ergast.com/api/f1/2023.json")
     .then(response => response.json())
     .then(data => {
       const carreras = data.MRData.RaceTable.Races;
