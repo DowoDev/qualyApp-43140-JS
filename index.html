@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Iconos/Icons Web (Boxicons) -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma/bulma.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+  <title>QualyAPP!</title>
+</head>
+
+<body>
+  <div id="myModal" class="modal">
+    <div id="modal-content" class="modal-content">
+      <!-- Contenido del modal generado dinámicamente por JavaScript -->
+    </div>
+  </div>
+  <header class="header">
+    <div class="logo">
+      <img src="./assets/posters/qualy.png" alt="">
+    </div>
+    
+    <h1 id="mensajeBienvenida"></h1>
+  </header>
+  <div class="arrow">
+    <a href="#" title="Back to Top"></i>UP 🡹</a>
+  </div>
+  <main>
+  <!-- Botón para actualizar la página -->
+  <button id="botonActualizar" style="display: none;" onclick="actualizarPagina()" class="botonIngresar2">REINICIAR APLICACION</button>
+  
+  <ul>
+    <li><strong><i class='bx bx-info-circle redFlag'></i>FUNCIONAMIENTO</strong></li>
+    <li><i class='bx bx-check-square yellow'></i> Seleccioná el <strong>Gran Premio del año 2023</strong> de la lista desplegable y presioná el botón <i class='bx bxs-flag-checkered redFlag'></i> para empezar a usar la APP.</li>
+    <li><i class='bx bx-check-square yellow'></i> Podés confirmar el circuito o no. Una vez confirmado te aparecerá el <strong>Selector de Sesión del Gran Premio</strong>.</li> 
+    <li><i class='bx bx-check-square yellow'></i> Podés elegir entre <strong>Clasificación o Carrera</strong> del Gran Premio seleccionado.</li>
+    <li><i class='bx bx-check-square yellow'></i> Selecciona <strong>Clasificación o Carrera</strong> y presiona el botón <strong>GENERAR TABLA </strong>para ver los resultados de los mismos .</li>
+    <li><i class='bx bx-check-square yellow'></i> Si deseas <strong>REINICIAR</strong> la Aplicación presiona el botón de <strong>REINICIO</strong>.</li>
+    <li><i class='bx bx-check-square yellow'></i> Si deseas <strong>ELEGIR OTRO GRAN PREMIO</strong> sólo debes usar el <strong>SELECTOR DE GRAN PREMIO</strong> y presionar el botón <i class='bx bxs-flag-checkered redFlag'></i>.</li>
+    <li><i class='bx bx-check-square yellow'></i> Si un Gran Premio todavía <strong>NO SE HA REALIZADO AUN</strong>, la APP te lo advertirá con un mensaje y podrás <strong>elegir otro Circuito</strong>.</li>
+  </ul>
+  <br>
+  <div class="bandera-pais">
+    <img id="banderaImg" src="" alt="Bandera del país" />
+  </div>
+  <form id="nombreCircuitoForm">
+    <label for="nombreCircuito">Seleccione el Gran Premio:</label>
+    <select id="nombreCircuito" required class="field2" size="1"></select>
+    <button type="submit"><i class='bx bxs-flag-checkered'></i></button>
+  </form>
+  <select id="tipoSelector" style="display: none;">
+    <option value="clasificacion">Clasificación</option>
+    <option value="carrera">Carrera</option>
+  </select>
+  <button id="btnConfirmarTipo" style="display: none;">GENERAR TABLA</button>
+  <div id="tablaContenedor" style="display: none;">
+    <table id="tablaDatos">
+      <!-- Aquí se generará la tabla dinámicamente -->
+    </table>
+  </div>
+  </main>
+
+  <script src="./js/script.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</body>
+
+</html>
