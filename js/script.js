@@ -43,7 +43,7 @@ function mostrarAnimacionCarga() {
 function mostrarMensajeBienvenida() {
   Swal.fire({
     icon: "success",
-    imageUrl: '../assets/img/f1a.gif',
+    imageUrl: './assets/img/f1a.gif',
     imageWidth: 400,
     imageHeight: 220,
     imageAlt: 'Custom image',
@@ -70,7 +70,7 @@ function cargarOpcionesSelector() {
 
   selector.appendChild(optionPlaceholder);
 
-  fetch("../json/fechas.json")
+  fetch("http://ergast.com/api/f1/2023.json")
     .then(response => response.json())
     .then(data => {
       const carreras = data.MRData.RaceTable.Races;
@@ -101,7 +101,7 @@ function mostrarImagenPais(indiceFecha) {
   const banderaImg = document.getElementById("banderaImg");
 
   if (indiceFecha >= 1 && indiceFecha <= 22) {
-    const rutaImagen = "../assets/flags/" + indiceFecha + ".png";
+    const rutaImagen = "./assets/flags/" + indiceFecha + ".png";
     banderaImg.src = rutaImagen;
     banderaImg.setAttribute("width", "500");
     banderaImg.style.display = "block";
@@ -149,7 +149,7 @@ nombreCircuitoForm.addEventListener("submit", function (event) {
             icon: 'success',
             title: country,
             color: '#38BA7C',
-            imageUrl: '../assets/posters/' + selectedRound + '.jpg',
+            imageUrl: './assets/posters/' + selectedRound + '.jpg',
             imageWidth: 256,
             imageHeight: 384,
             imageAlt: 'Custom image',
@@ -171,7 +171,7 @@ nombreCircuitoForm.addEventListener("submit", function (event) {
           }).showToast();
           Swal.fire({
             icon: 'error',
-            imageUrl: '../assets/img/f1error.gif',
+            imageUrl: './assets/img/f1error.gif',
             imageWidth: 400,
             imageHeight: 220,
             imageAlt: 'Custom image',
@@ -220,9 +220,10 @@ document.getElementById("btnConfirmarTipo").addEventListener("click", function (
   const selectedTipo = document.getElementById("tipoSelector").value;
 
   if (selectedTipo === "clasificacion") {
-    cargarDatos(`../json/clasificacion/q${selectedRound}.json`, true);
+    cargarDatos(`https://ergast.com/api/f1/2023/${selectedRound}/qualifying.json`, true);
+
   } else if (selectedTipo === "carrera") {
-    cargarDatos(`../json/carrera/r${selectedRound}.json`, false);
+    cargarDatos(`https://ergast.com/api/f1/2023/${selectedRound}/results.json`, false);
   }
 });
 
@@ -233,7 +234,7 @@ function actualizarPagina() {
     icon: 'info',
     title: 'REINICIANDO APLICACION',
     text: 'Presione el botón "OK" para Reiniciar la Aplicación',
-    imageUrl: '../assets/img/f1reset.gif',
+    imageUrl: './assets/img/f1reset.gif',
     imageWidth: 400,
     imageHeight: 220,
     imageAlt: 'Custom image',
@@ -303,7 +304,7 @@ function cargarDatos(url, isClasificacion) {
       tablaDatos.appendChild(encabezadosRow);
 
       datos.forEach(item => {
-        let imgPiloto = `../assets/img/${item.Driver.permanentNumber}.png`;
+        let imgPiloto = `./assets/img/${item.Driver.permanentNumber}.png`;
         let imgMiniatura = `<div id=info"></div><img src="${imgPiloto}" alt="Imagen del piloto" class="imagenPiloto" id="imgModal">`;
 
         let fila = document.createElement("tr");
@@ -358,7 +359,7 @@ function cargarDatos(url, isClasificacion) {
       }).showToast();
       Swal.fire({
         icon: 'error',
-        imageUrl: '../assets/img/f1error.gif',
+        imageUrl: './assets/img/f1error.gif',
         imageWidth: 400,
         imageHeight: 220,
         imageAlt: 'Custom image',
