@@ -3,7 +3,7 @@ const nombreCircuitoInput = document.getElementById("nombreCircuito");
 const botonIngresar = document.querySelector(".botonIngresar");
 const tablaDatos = document.getElementById("tablaDatos");
 
-// Simulación de animación de carga durante 5 segundos
+// Aanimación de carga simulada durante 3 segundos cuando se ingresa a la página o cuando se reinicia la aplciación
 function mostrarAnimacionCarga() {
   const overlay = document.createElement("div");
   overlay.id = "loading-overlay";
@@ -27,6 +27,7 @@ function mostrarAnimacionCarga() {
   loadingCounter.textContent = "Espere... 3 seg";
   loadingContainer.appendChild(loadingCounter);
 
+  // Luego de 3 segundos, mostrará por primera vez la página para el usuario con un mensaje de bienvenida
   let countdown = 3;
   const counterInterval = setInterval(() => {
     countdown--;
@@ -37,9 +38,10 @@ function mostrarAnimacionCarga() {
       mostrarMensajeBienvenida();
     }
   }, 1000);
+  
 }
 
-// Mostrar mensaje de bienvenida utilizando SweetAlert
+// Mensaje de bienvenida utilizando SweetAlert, que dura 5 segundos y luego desaparece.
 function mostrarMensajeBienvenida() {
   Swal.fire({
     icon: "success",
@@ -54,11 +56,12 @@ function mostrarMensajeBienvenida() {
     showConfirmButton: false,
   });
 }
-// Esperar a que se cargue la página y luego mostrar la animación de carga
+// Esperar a que se cargue la página y luego muestra la animación de carga
 window.addEventListener("load", () => {
   mostrarAnimacionCarga();
 });
 
+// Selector de circuitos desde una API externa
 function cargarOpcionesSelector() {
   const selector = document.getElementById('nombreCircuito');
 
@@ -96,7 +99,7 @@ function cargarOpcionesSelector() {
       console.error('Error al cargar el archivo JSON:', error);
     });
 }
-
+//Una vez seleccionado el Circuito muestra la imagen de la bandera de ese país
 function mostrarImagenPais(indiceFecha) {
   const banderaImg = document.getElementById("banderaImg");
 
@@ -114,6 +117,7 @@ function mostrarImagenPais(indiceFecha) {
 }
 
 let backupCircuito = "";
+//Con esto se "escucha" la selección de un circuito y luego de la seleccion se muestra un diálogo de confirmación
 nombreCircuitoForm.addEventListener("submit", function (event) {
   event.preventDefault();
   const tablaContenedor = document.getElementById("tablaContenedor");
@@ -169,6 +173,7 @@ nombreCircuitoForm.addEventListener("submit", function (event) {
             },
             stopOnFocus: true
           }).showToast();
+          //En el caso de que que el Gran Premio todavía no se corrió, da un mensaje de error con un GIF alusivo y le permite al usuario volver a elegir otra Fecha/Carrera/Circuito
           Swal.fire({
             icon: 'error',
             imageUrl: './assets/img/f1error.gif',
@@ -186,9 +191,10 @@ nombreCircuitoForm.addEventListener("submit", function (event) {
       }
     });
   }
-
 });
 
+// Esto es para mostrar un Toastify cuando cambia la selección en el selector de circuitos. Desaparece después de un segundo
+nombreCircuitoInput.addEventListener("change", selectorCambio);
 function selectorCambio() {
   const nombreCircuito = document.getElementById('nombreCircuito');
   const seleccionado = nombreCircuito.options[nombreCircuito.selectedIndex].value;
@@ -202,7 +208,7 @@ function selectorCambio() {
 
   Toastify({
     text: `País seleccionado: ${countryName}`,
-    duration: 3000,
+    duration: 1000,
     close: true,
     gravity: "top",
     position: "right",
@@ -214,8 +220,7 @@ function selectorCambio() {
 
 }
 
-nombreCircuitoInput.addEventListener("change", selectorCambio);
-
+//Con esto se "escucha" el evento de confirmación del tipo de tabla que el usuario quiere ver (Clasificación o Carrera)
 document.getElementById("btnConfirmarTipo").addEventListener("click", function () {
   const selectedTipo = document.getElementById("tipoSelector").value;
 
@@ -227,8 +232,8 @@ document.getElementById("btnConfirmarTipo").addEventListener("click", function (
   }
 });
 
+// Función para actualizar la página con un GIF alusivo y reiniciarla
 document.getElementById("botonActualizar").addEventListener("click", actualizarPagina);
-
 function actualizarPagina() {
   Swal.fire({
     icon: 'info',
@@ -239,6 +244,7 @@ function actualizarPagina() {
     imageHeight: 220,
     imageAlt: 'Custom image',
   }).then(() => {
+    //Mensaje de espera de 3 segundos que se muestra al usuario notificandole del reinicio de la aplicación
     Toastify({
       text: "LA APLICACION SE REINICIARA AUTOMATICAMENTE DESPUES DE 3 SEGUNDOS",
       duration: 3000,
@@ -257,7 +263,7 @@ function actualizarPagina() {
     }, 3000);
   });
 }
-
+// Con esta función se muestra el selector de tipo de tabla que se quiere elegir y el botón de confirmación
 function mostrarSelectorTipo() {
   const tipoSelector = document.getElementById("tipoSelector");
   const btnConfirmarTipo = document.getElementById("btnConfirmarTipo");
@@ -282,13 +288,12 @@ function mostrarSelectorTipo() {
   tipoSelector.style.display = "block";
   btnConfirmarTipo.style.display = "block";
 }
-
+// Carga los datos que haya seleccionado el usuario (clasificación o carrera) trayendo la informacion elegida desde la  API y muestra todo en una tabla (1 para clasificacion y otra para carrera por la diferencia de datos que traen)
 function cargarDatos(url, isClasificacion) {
   fetch(url)
     .then(response => response.json())
     .then(data => {
       const datos = isClasificacion ? data.MRData.RaceTable.Races[0].QualifyingResults : data.MRData.RaceTable.Races[0].Results;
-
       tablaDatos.innerHTML = "";
 
       const encabezados = isClasificacion
@@ -302,7 +307,7 @@ function cargarDatos(url, isClasificacion) {
         encabezadosRow.appendChild(th);
       });
       tablaDatos.appendChild(encabezadosRow);
-
+      // Estructura de la fila con los datos de cada piloto, aqui se incluye al boton INFO para luego si el usuario lo requiere pida información personal de ese piloto 
       datos.forEach(item => {
         let imgPiloto = `./assets/img/${item.Driver.permanentNumber}.png`;
         let imgMiniatura = `<div id=info"></div><button class="button btn-info">
@@ -317,6 +322,15 @@ function cargarDatos(url, isClasificacion) {
           ${tiempo.map(t => `<td>${t}</td>`).join('')}
         `;
         tablaDatos.appendChild(fila);
+        //Con esto lo que se genera SOLO EN CLASIFICACION NO ASI EN CARRRERA, es una linea posterior al puesto 10 (los que se cayeron en la Q2) y otra linea posterior al puesto 15 (los que se cayeron en la Q1).
+        //A nivel reglas en F1, para que se entienda, los pilotos tienen 3 tandas posibles de clasficaciones para que se den las posiciones de largada para el día siguiente.
+        //Se corre primero la Q1, y pasan los primeros 15 mejores tiempos de clasificación, luego se corre la Q2 y pasan los primeros 10 mejores tiempos de clasificación,
+        //y por último se corre la Q3, que son los 10 mejores que pasaron la Q1 y la Q2 de la ronda de clasificación buscando un mejor tiempo para la carrera.
+        //Por lo que las rondas de clasificaciones son eliminatorias. Por eso se notará en la lista que los que se cayeron en la Q1 solo tienen un tiempo de vuelta (su mejor tiempo en esa sesión),
+        //los que se cayeron en la Q2 solo tienen 2 tiempos de vuelta, uno en Q1 y el otro en Q2 (su mejor tiempo de cada una de esas sesiones)
+        //y por último figuran los 10 primeros con tiempos en las 3 sesiones (Q1, Q2 y Q3). 
+        //Puede pasar que en Q1, Q2 o Q3, no haya tiempos reflejados para un piloto en particular ya que puede pasar que ese piloto en particular haya tenido algún tipo de problema 
+        //y no pudo haber tirado algún tiempo para esa sesión.
         if (isClasificacion) {
           if (item.position == 10) {
             fila.classList.add("top10");
@@ -331,18 +345,20 @@ function cargarDatos(url, isClasificacion) {
       tablaContenedor.style.display = "block";
       tablaContenedor.style.marginTop = "20px";
       
+      //Aqui está la información personal de cada piloto, es sólo INFORMACION PERSONAL para luego poder plasmarla en la CARD PERSONAL
       const pilotosJson = 'https://raw.githubusercontent.com/DowoDev/qinquela-43140-JS/main/js/pilotos.json';
 
-      // Función para obtener los datos y procesarlos
+      //Con esta función es como busco los datos de esa API y que se puede llegar a usar para generar la CARD PERSONAL
       async function fetchDataPilotos() {
         try {
           const respuesta = await fetch(pilotosJson);
-          const datos = await respuesta.json();
+          const datospilotos = await respuesta.json();
       
-          const tarjetas = datos.MRData.DriverTable.Drivers;
+          const tarjetas = datospilotos.MRData.DriverTable.Drivers;
       
           let datosExtraidos = tarjetas.map(piloto => ({
             permanentNumber: piloto.permanentNumber,
+            driverId: piloto.driverId,
             givenName: piloto.givenName,
             familyName: piloto.familyName,
             country: piloto.country,
@@ -356,33 +372,38 @@ function cargarDatos(url, isClasificacion) {
             logo: piloto.logo,
             pic: piloto.pic,
             picNumber: piloto.picNumber,
+            helmet:piloto.helmet,
             season: piloto.season,
             races_won: piloto.races_won,
           }));
-      
+          
           return datosExtraidos;
+          
         } catch (error) {
           console.error('Error al extraer los datos:', error);
           return [];
         }
       }
-
-      // Llamar a la función y obtener los datos
-      fetchDataPilotos().then(data => {
-        console.log(data);
       
-        // Agregar un manejador de eventos a los botones "INFO"
+      // Llamar a la función y se obtienen los datos
+      fetchDataPilotos().then(data => {
+        // Escuchamos el evento de los botones "INFO" y dependiendo de la posicion del piloto en la tabla cruza informacion con los datos de Carrera o Clasificacion y busca a ese piloto particular y trae sus datos personales
         let infoPiloto = document.getElementsByClassName("btn-info");
+        
         for (let index = 0; index < infoPiloto.length; index++) {
           infoPiloto[index].addEventListener("click", () => {
-            const pilotoData = data[index];
-            console.log(pilotoData) // Obtener los datos del piloto correspondiente
-            mostrarTarjetaPiloto(pilotoData); // Llamar a la función para mostrar la tarjeta
+            const pilotoData = data.find(piloto => piloto.driverId === datos[index].Driver.driverId);
+            if (pilotoData) {
+              mostrarTarjetaPiloto(pilotoData); // mostrar la CARD PERSONAL
+            } else {
+              console.error(`No se encontró el piloto con driverId ${datos[index].Driver.driverId} en los datos.`);
+            }
+
           });
         }
       });
       
-      // Función para mostrar la tarjeta del piloto
+      // Con esa función se arma la CARD PERSONAL con información del piloto que seleccionó el usuario
       function mostrarTarjetaPiloto(pilotoData) {
         const overlayContainer = document.createElement("div");
         overlayContainer.classList.add("overlayContainer");
@@ -399,19 +420,21 @@ function cargarDatos(url, isClasificacion) {
           cardContainer.remove();
         });
 
-        const permanentNumber = pilotoData.permanentNumber;
-
         const pilotoImg = document.createElement("img");
         pilotoImg.className = "pilotoImg";
         pilotoImg.src = pilotoData.pic;
         pilotoImg.alt = pilotoData.givenName + " " + pilotoData.familyName;
 
         const pilotoName = document.createElement("h2");
-        pilotoName.textContent = pilotoData.givenName + " " + pilotoData.familyName;
+        pilotoName.innerHTML = "<span class=nombre>"+pilotoData.givenName + " " + pilotoData.familyName+"</span>";
 
         const pilotoNumber = document.createElement("img");
         pilotoNumber.className = "pilotoNumber";
         pilotoNumber.src = pilotoData.picNumber;
+
+        const helmet = document.createElement("img");
+        helmet.className = "helmet";
+        helmet.src = pilotoData.helmet;
 
         const countryImg = document.createElement("img");
         countryImg.className = "countryImg";
@@ -419,16 +442,16 @@ function cargarDatos(url, isClasificacion) {
         countryImg.alt = pilotoData.country;
 
         const constructorName = document.createElement("p");
-        constructorName.textContent = "Constructor:" + pilotoData.Constructor_name;
+        constructorName.innerHTML = "Constructor: " + "<span>"+pilotoData.Constructor_name+"</span>";
 
         const season = document.createElement("p");
-        season.textContent = "Temporada: " + pilotoData.season;
+        season.innerHTML  = "Temporada: " + "<span>" + pilotoData.season+"</span>";
 
         const racesWon = document.createElement("p");
-        racesWon.textContent = "Carreras ganadas: " + pilotoData.races_won;
+        racesWon.innerHTML  = "Carreras ganadas: " + "<span>" + pilotoData.races_won+"</span>";
 
         const championships = document.createElement("p");
-        championships.textContent = "Campeonatos: " + pilotoData.world_championships;
+        championships.innerHTML  = "Campeonatos: " + "<span>" + pilotoData.world_championships+"</span>";
 
         document.body.appendChild(overlayContainer);
         document.body.appendChild(cardContainer);
@@ -436,17 +459,14 @@ function cargarDatos(url, isClasificacion) {
         cardContainer.appendChild(pilotoImg);
         cardContainer.appendChild(pilotoName);
         cardContainer.appendChild(pilotoNumber);
+        cardContainer.appendChild(helmet);
         cardContainer.appendChild(countryImg);
         cardContainer.appendChild(constructorName);
         cardContainer.appendChild(season);
         cardContainer.appendChild(racesWon);
         cardContainer.appendChild(championships);
-
-      
-   
       }
-      
-
+      //Mensaje de Toastify que se envía cuando se cargan los datos de la Tabla de Clasificación o Carrera según lo que haya elegido el usuario
       Toastify({
         text: "LOS DATOS SOLICITADOS HAN SIDO CARGADOS EXITOSAMENTE",
         duration: 3000,
@@ -460,6 +480,7 @@ function cargarDatos(url, isClasificacion) {
         stopOnFocus: true,
       }).showToast();
       localStorage.setItem("datosCarrera", JSON.stringify(datos));
+      localStorage.setItem("datosPilotos", JSON.stringify(pilotosJson));
     })
 
     .catch(error => {
@@ -482,20 +503,16 @@ function cargarDatos(url, isClasificacion) {
         imageAlt: 'Custom image',
         title: 'Lo Siento',
         text: 'EL GRAN PREMIO SELECCIONADO TODAVIA NO SE HA REALIZADO',
-        confirmButtonText: 'INICIAR REINICIO APLICACION'
+        confirmButtonText: 'VOLVER'
       }).then(() => {
-        // Reiniciar la página
-        actualizarPagina();
+        return; // Salir de la función si el Gran Premio no existe
       });
-
       return; // Salir de la función si el Gran Premio no existe
     });
-
-
 }
-
+// Carga las opciones del selector de circuitos al cargar la página
 cargarOpcionesSelector();
-
+// Llama a la función para el cambio en el selector de circuitos al cargar la página
 selectorCambio();
 
 

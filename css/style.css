@@ -294,7 +294,7 @@ td {
   position: absolute;
   width: 11.25rem;
   margin: 0 auto;
-  margin-top: 86px;
+  margin-top: 268px;
   padding: 1rem 1rem;
   left: 66.7rem;
   font-size: 1.2em;
@@ -312,6 +312,7 @@ td {
   color: #ededed;
   cursor: pointer;
   font-family: "Quicksand", sans-serif;
+  z-index: 1;
 }
 .botonIngresar2:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
@@ -560,6 +561,7 @@ tr:nth-child(2) td {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  z-index: 1;
 }
 
 .close-btn {
@@ -619,19 +621,24 @@ tr:nth-child(2) td {
   backdrop-filter: blur(0.25rem);
   -webkit-backdrop-filter: blur(1.25rem);
 }
-
-.card-container h2 {
+.card-container h2{
+  position: relative;
+  margin-top: -4px;
+  width: 335px;
+  height: 44px;
+  left: 13px;
+  background-color: #c92e46;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0px 0px 10px #000000;
+}
+.nombre {
   position: relative;
   margin-top: -4px;
   width: 335px;
   left: 13px;
-  font-size: 24px;
   font-size: 35px;
   font-family: "Rubik", sans-serif;
   color: #ededed;
-  background-color: #c92e46;
-  border-radius: 0 0 6px 6px;
-  box-shadow: 0px 0px 10px #000000;
 }
 
 .card-container img.country {
@@ -639,15 +646,32 @@ tr:nth-child(2) td {
   height: 20px;
   margin-top: 5px;
 }
+.card-container img.teamLogo {
+  position: absolute;
+  width: 100px;
+  margin-top: -367px;
+  left: 32px;
+  background-color: #ffffff25;
+  backdrop-filter: blur(0.25rem);
+  -webkit-backdrop-filter: blur(1.25rem);
+}
 
 .card-container p {
   margin-top: 8px;
   font-family: "Roboto", sans-serif;
-  font-weight: bolder;
   font-size: 20px;
   color: #1f2029;
   box-shadow: 0px 0px 10px #00000041;
+}
+.card-container p span {
+  font-weight: bolder;
+}
 
+.helmet{
+  position: absolute;
+  width: 77px;
+  left: 38px;
+  top: 294px;
 }
 
 .button {
