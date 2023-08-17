@@ -86,6 +86,15 @@ header {
   filter: drop-shadow(0rem 0.0625rem 0.0625rem #c92e4686);
   transition: 0.3s;
 }
+.arrow:active {
+  background-color: rgb(255, 56, 86);
+  /*50, 168, 80*/
+  font-size: .875rem;
+  color: #f7c5cc;
+  box-shadow: #c92e46 0px 1px 4px 2px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
 .arrow a {
   display: block;
   cursor: pointer;
@@ -221,17 +230,20 @@ th {
   border: 0;
   background-color: #ff3856;
   transition: all .3s ease;
-  box-shadow: #c92e46 0px 10px 0px 0px;
+  box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
+  filter: drop-shadow(0px 7px 7px #c92e46);
 }
-#nombreCircuitoForm button:hover {
+/* #nombreCircuitoForm button:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
-}
+} */
 #nombreCircuitoForm button:active {
-  background-color: #ff3856;
+  background-color: rgb(255, 56, 86);
   /*50, 168, 80*/
-  box-shadow: #c92e46 0px 0px 0px 0px;
+  font-size: 18.8px;
+  color: #f7c5cc;
+  box-shadow: #c92e46 0px 1px 4px 2px;
   transform: translateY(5px);
   transition: 200ms;
 }
@@ -271,24 +283,27 @@ td {
   letter-spacing: 1.5px;
   font-size: 15px;
   transition: all .3s ease;
-  box-shadow: #c92e46 0px 10px 0px 0px;
+  box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
+  filter: drop-shadow(0px 7px 7px #c92e46);
 }
-.botonIngresar:hover {
+/* .botonIngresar:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
-}
+} */
 .botonIngresar:active {
-  background-color: #ff3856;
+  background-color: rgb(255, 56, 86);
   /*50, 168, 80*/
-  box-shadow: #c92e46 0px 0px 0px 0px;
+  font-size: 18.8px;
+  color: #f7c5cc;
+  box-shadow: #c92e46 0px 1px 4px 2px;
   transform: translateY(5px);
   transition: 200ms;
 }
 .botonIngresar:hover {
-  filter: drop-shadow(0rem 0.0625rem 0.0625rem #f953c783);
+  /* filter: drop-shadow(0rem 0.0625rem 0.0625rem #f953c783);
   transform: scale(1.05);
-  transition: 0.8s;
+  transition: 0.8s; */
 }
 .botonIngresar2 {
   position: absolute;
@@ -308,19 +323,22 @@ td {
   letter-spacing: 1.5px;
   font-size: 15px;
   transition: all .3s ease;
-  box-shadow: #c92e46 0px 10px 0px 0px;
+  box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
+  filter: drop-shadow(0px 7px 7px #c92e46);
   font-family: "Quicksand", sans-serif;
   z-index: 1;
 }
-.botonIngresar2:hover {
+/* .botonIngresar2:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
-}
+} */
 .botonIngresar2:active {
-  background-color: #ff3856;
+  background-color: rgb(255, 56, 86);
   /*50, 168, 80*/
-  box-shadow: #c92e46 0px 0px 0px 0px;
+  font-size: 14px;
+  color: #f7c5cc;
+  box-shadow: #c92e46 0px 1px 4px 2px;
   transform: translateY(5px);
   transition: 200ms;
 }
@@ -462,17 +480,20 @@ tr:nth-child(2) td {
   letter-spacing: 1.5px;
   font-size: 15px;
   transition: all .3s ease;
-  box-shadow: #c92e46 0px 10px 0px 0px;
+  box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
+  filter: drop-shadow(0px 7px 7px #c92e46);
 }
-#btnConfirmarTipo:hover {
+/* #btnConfirmarTipo:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
-}
+} */
 #btnConfirmarTipo:active {
   background-color: rgb(255, 56, 86);
   /*50, 168, 80*/
-  box-shadow: #c92e46 0px 0px 0px 0px;
+  font-size: 14px;
+  color: #f7c5cc;
+  box-shadow: #c92e46 0px 1px 4px 2px;
   transform: translateY(5px);
   transition: 200ms;
 }
@@ -548,30 +569,31 @@ tr:nth-child(2) td {
   font-size: 1.5rem;
 }
 
-
 .card-container {
   position: fixed;
   top: 50%;
   left: 50%;
   width: 400px;
-  height: 568px;
+  height: 614px;
   transform: translate(-50%, -50%);
   background-color: white;
-  box-shadow: 0px 0px 10px #000000;
+  box-shadow: #00000066 0px 2px 4px, #0000004d 0px 7px 13px -3px, #00000033 0px -3px 0px inset;
+  filter: drop-shadow(19px 12px 34px #020202);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
   z-index: 1;
+  
 }
 
 .close-btn {
   position: absolute;
-  width: 191px;
+  width: 153px;
   height: 34px;
   margin: 0 auto;
-  top: 544px;
+  top: 558px;
   /* padding: 17px 16px; */
-  right: 106px;
+  left: 18px;
   font-family: "Quicksand", sans-serif;
   font-size: 19.8px;
   font-weight: 600;
@@ -581,32 +603,74 @@ tr:nth-child(2) td {
   border: 0;
   background-color: #ff3856;
   letter-spacing: 1.5px;
-  box-shadow: #c92e46 0px 10px 0px 0px;
+  transition: all .3s ease;
+  box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
-  transition: all .3s ease;
-
+  filter: drop-shadow(0px 10px 10px #c92e46);
 }
 
-.close-btn:hover {
+/* .close-btn:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
-}
+  filter: drop-shadow(0px 5px 5px #c92e46);
+} */
 .close-btn:active {
   background-color: rgb(255, 56, 86);
   /*50, 168, 80*/
-  box-shadow: #c92e46 0px 0px 0px 0px;
+  font-size: 18.8px;
+  color: #f7c5cc;
+  box-shadow: #c92e46 0px 1px 4px 2px;
   transform: translateY(5px);
   transition: 200ms;
 }
 
+.wiki a{
+  position: absolute;
+  width: 153px;
+  height: 34px;
+  margin: 0 auto;
+  top: 558px;
+  padding: 5px 0px;
+  text-decoration: none;
+  right: 29px;
+  font-family: "Quicksand", sans-serif;
+  font-size: 19.8px;
+  font-weight: 600;
+  font-stretch: condensed;
+  color: #ededed;
+  border-radius: 7px;
+  border: 0;
+  background-color: #3b82fd;
+  letter-spacing: 1.5px;
+  transition: all .3s ease;
+  box-shadow: #2e66c9  0px 4px 2px 5px;
+  color: #ededed;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all .3s ease;
+  filter: drop-shadow(0px 5px 5px #2e66c9);/*#0c0cf1*/
+}
+/* .wiki a:hover {
+  box-shadow: #2e66c9 0px 7px 0px 0px;
+} */
+.wiki a:active {
+  background-color: #3b82fd;
+  /*50, 168, 80*/
+  font-size: 18.8px;
+  color: #c2d8ff;
+  box-shadow: #2e66c9 0px 1px 4px 2px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
 .pilotoImg{
   width: 335px;
   border-radius: 6px 6px 0 0;
   margin-top: 10px;
-  box-shadow: 0px 0px 10px #000000;
+  box-shadow: #00000066 0px 2px 4px, #0000004d 0px 7px 13px -3px, #00000033 0px -3px 0px inset;
 }
 .countryImg {
   position: absolute;
+  background-color: #ffffff25;
   width: 52px;
   margin-top: -367px;
   right: 43px;
@@ -616,9 +680,10 @@ tr:nth-child(2) td {
   position: absolute;
   width: 100px;
   margin-top: -367px;
-  left: 32px;
+  left: 29px;
   background-color: #ffffff25;
   backdrop-filter: blur(0.25rem);
+  box-shadow: #00000066 0px 2px 11px, #0000004d 0px 0px 3px 2px, #00000033 4px -50px 16px inset;
   -webkit-backdrop-filter: blur(1.25rem);
 }
 .card-container h2{
@@ -629,13 +694,13 @@ tr:nth-child(2) td {
   left: 13px;
   background-color: #c92e46;
   border-radius: 0 0 6px 6px;
-  box-shadow: 0px 0px 10px #000000;
+  box-shadow: #00000066 0px 2px 4px, #0000004d 0px 7px 13px -3px, #00000033 0px -3px 0px inset;
 }
 .nombre {
   position: relative;
   margin-top: -4px;
   width: 335px;
-  left: 13px;
+  left: 0px;
   font-size: 35px;
   font-family: "Rubik", sans-serif;
   color: #ededed;
@@ -714,8 +779,9 @@ tr:nth-child(2) td {
 .button:active {
   background-color: #f44336;
   /*50, 168, 80*/
-  box-shadow: #c50f02 0px 0px 0px 0px;
-  transform: translateY(2px);
+  color: #c2d8ff;
+  box-shadow: #c50f02 0px 1px 4px 2px;
+  transform: translateY(5px);
   transition: 200ms;
 }
 

@@ -375,6 +375,7 @@ function cargarDatos(url, isClasificacion) {
             helmet:piloto.helmet,
             season: piloto.season,
             races_won: piloto.races_won,
+            wiki: piloto.wiki
           }));
           
           return datosExtraidos;
@@ -436,6 +437,10 @@ function cargarDatos(url, isClasificacion) {
         helmet.className = "helmet";
         helmet.src = pilotoData.helmet;
 
+        const wiki = document.createElement("p");
+        wiki.className = "wiki";
+        wiki.innerHTML  = "<a href="+pilotoData.wiki+" target=_blank>Wikipedia</a>";        
+
         const countryImg = document.createElement("img");
         countryImg.className = "countryImg";
         countryImg.src = pilotoData.countryPic;
@@ -465,6 +470,7 @@ function cargarDatos(url, isClasificacion) {
         cardContainer.appendChild(season);
         cardContainer.appendChild(racesWon);
         cardContainer.appendChild(championships);
+        cardContainer.appendChild(wiki)
       }
       //Mensaje de Toastify que se envía cuando se cargan los datos de la Tabla de Clasificación o Carrera según lo que haya elegido el usuario
       Toastify({
