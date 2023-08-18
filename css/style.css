@@ -81,7 +81,7 @@ header {
   font-weight: 700;
   -webkit-text-fill-color: #ededed;
   color: #ededed;
-  border: 0.0625rem solid #c92e46;
+  border: 1px solid #252021;
   border-radius: 1.125rem 1.125rem 1.125rem 0.3125rem;
   filter: drop-shadow(0rem 0.0625rem 0.0625rem #c92e4686);
   transition: 0.3s;
@@ -147,8 +147,10 @@ h2 {
 }
 .redFlag{
   color: #c92e46;
-  font-size: 25px;
-  padding: 0 2px 0 2px;
+  font-size: 34px;
+  padding: 0 3px 0 2px;
+  top: 6px;
+  position: relative;
 
 }
  /* Estilos para listas */
@@ -165,7 +167,9 @@ ul li:nth-child(1){
   color: #ffe600;
 }
 .info-body{
-  font-size: 15px;
+  font-size: 28px;
+  top: 7px;
+  position: relative;
 }
  /* Estilos para tablas */
 table {
@@ -221,19 +225,20 @@ th {
   font-weight: 500;
 }
 #nombreCircuitoForm button {
-  padding: 0.8rem 1rem;
-  font-size: 1.2em;
-  font-weight: 600;
-  color: #ededed;
-  border: none;
   border-radius: 10px;
   border: 0;
   background-color: #ff3856;
-  transition: all .3s ease;
   box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
-  filter: drop-shadow(0px 7px 7px #c92e46);
+  filter: drop-shadow(0px 4px 2px #c92e46);
+  transition: all .3s ease;
+}
+#nombreCircuitoForm i{
+  color: #ededed;
+  border: none;
+  font-size: 30px;
+  padding: 0.8rem;  
 }
 /* #nombreCircuitoForm button:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
@@ -241,8 +246,6 @@ th {
 #nombreCircuitoForm button:active {
   background-color: rgb(255, 56, 86);
   /*50, 168, 80*/
-  font-size: 18.8px;
-  color: #f7c5cc;
   box-shadow: #c92e46 0px 1px 4px 2px;
   transform: translateY(5px);
   transition: 200ms;
@@ -286,7 +289,7 @@ td {
   box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
-  filter: drop-shadow(0px 7px 7px #c92e46);
+  filter: drop-shadow(0px 4px 2px #c92e46);
 }
 /* .botonIngresar:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
@@ -300,43 +303,37 @@ td {
   transform: translateY(5px);
   transition: 200ms;
 }
-.botonIngresar:hover {
-  /* filter: drop-shadow(0rem 0.0625rem 0.0625rem #f953c783);
+/*.botonIngresar:hover {
+  filter: drop-shadow(0rem 0.0625rem 0.0625rem #f953c783);
   transform: scale(1.05);
-  transition: 0.8s; */
-}
+  transition: 0.8s; 
+}*/
 .botonIngresar2 {
   position: absolute;
-  width: 11.25rem;
+  width: 12.25rem;
   margin: 0 auto;
-  margin-top: 268px;
-  padding: 1rem 1rem;
-  left: 66.7rem;
-  font-size: 1.2em;
-  font-weight: 600;
-  font-stretch: condensed;
-  color: #ededed;
+  margin-top: 342px;
+  padding: 8.5px 15px;
+  left: 58.7rem;
+  cursor: pointer;
   border: none;
   border-radius: 10px;
   border: 0;
-  background-color: #ff3856;
-  letter-spacing: 1.5px;
-  font-size: 15px;
-  transition: all .3s ease;
-  box-shadow: #c92e46  0px 4px 2px 5px;
-  color: #ededed;
-  cursor: pointer;
-  filter: drop-shadow(0px 7px 7px #c92e46);
   font-family: "Quicksand", sans-serif;
+  color: #ededed;
+  font-size: 17px;
+  font-weight: 400;
+  background-color: #ff3856;
+  box-shadow: #c92e46 0px 4px 2px 5px;
+  filter: drop-shadow(0px 4px 2px #c92e46);
   z-index: 1;
+  transition: all .3s ease;
 }
-/* .botonIngresar2:hover {
-  box-shadow: #c92e46 0px 7px 0px 0px;
-} */
+
 .botonIngresar2:active {
   background-color: rgb(255, 56, 86);
   /*50, 168, 80*/
-  font-size: 14px;
+  font-size: 16px;
   color: #f7c5cc;
   box-shadow: #c92e46 0px 1px 4px 2px;
   transform: translateY(5px);
@@ -470,20 +467,18 @@ tr:nth-child(2) td {
   padding: 17px 16px;
   left: 42.7rem;
   font-family: "Quicksand", sans-serif;
-  font-size: 1.2em;
-  font-weight: 600;
-  font-stretch: condensed;
+  font-weight: 400;
+  font-size: 20px;
   color: #ededed;
   border-radius: 10px;
   border: 0;
   background-color: #ff3856;
   letter-spacing: 1.5px;
-  font-size: 15px;
   transition: all .3s ease;
   box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
-  filter: drop-shadow(0px 7px 7px #c92e46);
+  filter: drop-shadow(0px 4px 2px #c92e46);
 }
 /* #btnConfirmarTipo:hover {
   box-shadow: #c92e46 0px 7px 0px 0px;
@@ -491,7 +486,8 @@ tr:nth-child(2) td {
 #btnConfirmarTipo:active {
   background-color: rgb(255, 56, 86);
   /*50, 168, 80*/
-  font-size: 14px;
+  font-size: 19px;
+  font-weight: 200;
   color: #f7c5cc;
   box-shadow: #c92e46 0px 1px 4px 2px;
   transform: translateY(5px);
@@ -593,7 +589,7 @@ tr:nth-child(2) td {
   margin: 0 auto;
   top: 558px;
   /* padding: 17px 16px; */
-  left: 18px;
+  left: 29px;
   font-family: "Quicksand", sans-serif;
   font-size: 19.8px;
   font-weight: 600;
@@ -607,7 +603,23 @@ tr:nth-child(2) td {
   box-shadow: #c92e46  0px 4px 2px 5px;
   color: #ededed;
   cursor: pointer;
-  filter: drop-shadow(0px 10px 10px #c92e46);
+  filter: drop-shadow(0px 7px 10px #c92e46);
+}
+.close-btn i {
+  left: 8px;
+  font-size: 28.8px;
+  position: absolute;
+  display: flex;
+  bottom: 0px;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+.close-btn i:active{
+  font-size: 10.8px;
+  transition: 2s ease-out;
 }
 
 /* .close-btn:hover {
@@ -660,7 +672,8 @@ tr:nth-child(2) td {
   color: #c2d8ff;
   box-shadow: #2e66c9 0px 1px 4px 2px;
   transform: translateY(5px);
-  transition: 200ms;
+  transition: 200ms ;
+  
 }
 .pilotoImg{
   width: 335px;
@@ -668,6 +681,43 @@ tr:nth-child(2) td {
   margin-top: 10px;
   box-shadow: #00000066 0px 2px 4px, #0000004d 0px 7px 13px -3px, #00000033 0px -3px 0px inset;
 }
+.containerImg {
+  position: relative;
+  overflow: hidden;
+  width: 335px;
+  height: 357px;
+  border-radius: 6px 6px 0 0;
+  margin-top: 10px;
+  box-shadow: #00000066 0px 2px 4px, #0000004d 0px 7px 13px -3px, #00000033 0px -3px 133px inset;
+  left: 13px;
+  top: -14px;
+  transition: all .5s;
+}
+.containerImg2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px 6px 0 0;
+  background-position: center;
+  background-size: cover;
+  box-shadow: #00000066 0px 2px 4px, #0000004d 0px 7px 13px -3px, #00000033 0px -3px 0px inset;
+  transition: all .5s;
+}
+.containerImg:hover .containerImg2 {
+  transform: scale(1.1);
+  transition: all .5s;
+}
+.containerImg2::before {
+  content: "";
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(52, 73, 94, 0.75);
+  transition: all .5s;
+}
+
 .countryImg {
   position: absolute;
   background-color: #ffffff25;
@@ -688,7 +738,7 @@ tr:nth-child(2) td {
 }
 .card-container h2{
   position: relative;
-  margin-top: -4px;
+  margin-top: -18px;
   width: 335px;
   height: 44px;
   left: 13px;
@@ -726,7 +776,6 @@ tr:nth-child(2) td {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   color: #1f2029;
-  box-shadow: 0px 0px 10px #00000041;
 }
 .card-container p span {
   font-weight: bolder;
@@ -737,6 +786,13 @@ tr:nth-child(2) td {
   width: 77px;
   left: 38px;
   top: 294px;
+  transition: all .5s;
+}
+.helmet:hover{
+  transform: scale(1.8);
+  transition: all .5s;
+  left: 70px;
+  top: 270px;
 }
 
 .button {
@@ -800,4 +856,60 @@ tr:nth-child(2) td {
   display: none;
   justify-content: center;
   align-items: center;
+}
+
+footer {
+  bottom: -20px;
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  background-color: #181818cb;
+  backdrop-filter: blur(0.25rem);
+  -webkit-backdrop-filter: blur(1.25rem);
+  transition: all 0.5s;
+  position: relative;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  border-bottom: .0625rem solid #908e8eae;
+  border-top: .0625rem solid #908e8eae; 
+}
+footer .etiquetas {
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  /* background-color: #181818cb; */
+  /* backdrop-filter: blur(0.25rem); */
+  padding: 0 10px;
+
+}
+footer .me{
+  height: 100%;
+  right: 0px;
+  position: absolute;
+  /* background-color: #ffffff02; */
+  /* backdrop-filter: blur(0.25rem); */
+  padding: 0 60px;
+  
+}
+
+footer .wow {
+  color: #fd007aee; 
+}
+footer .etiquetas p {
+  color: #ededed;
+  font-size: 22px;
+  font-weight: 600;
+  -webkit-text-stroke: 2px #0000001c;
+  list-style: none;
+  text-decoration: none; 
+  top: 10px;
+  position: relative;
+}
+footer a {
+  color: #ededed;
+  text-decoration: none;
+  top: 15px;
+  position: relative;
+  right: -35px;
 }

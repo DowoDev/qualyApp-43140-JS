@@ -119,6 +119,7 @@ function mostrarImagenPais(indiceFecha) {
 let backupCircuito = "";
 //Con esto se "escucha" la selección de un circuito y luego de la seleccion se muestra un diálogo de confirmación
 nombreCircuitoForm.addEventListener("submit", function (event) {
+
   event.preventDefault();
   const tablaContenedor = document.getElementById("tablaContenedor");
 
@@ -132,64 +133,67 @@ nombreCircuitoForm.addEventListener("submit", function (event) {
     if (backupCircuito == "") {
       backupCircuito = seleccionado;
     }
-    Swal.fire({
-      icon: 'question',
-      title: 'Elegiste el circuito de\n ' + country,
-      text: `¿Confirmas la selección?`,
-      showCancelButton: true,
-      confirmButtonText: 'Sí',
-      cancelButtonText: 'No',
-      confirmButtonColor: '#38BA7C',
-      cancelButtonColor: '#F34542',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        tablaDatos.innerHTML = "";//Vacía la tabla cunado elegimos un país nuevo
-        backupCircuito = seleccionado;
-        const mensajeBienvenida = document.getElementById("mensajeBienvenida");
-        mensajeBienvenida.textContent = `Final JS - Comisión 43140 | J. Sebastián Rubio`;
-        selectedRound = parseInt(circuitoInfo[0]);
-        if (selectedRound < 13) {
-          Swal.fire({
-            icon: 'success',
-            title: country,
-            color: '#38BA7C',
-            imageUrl: './assets/posters/' + selectedRound + '.jpg',
-            imageWidth: 256,
-            imageHeight: 384,
-            imageAlt: 'Custom image',
-            text: 'SELECCIONADO CON ÉXITO!',
-          });
-          mostrarImagenPais(parseInt(seleccionado.split(" ")[0]));
-          mostrarSelectorTipo();
-        } else {
-          Toastify({
-            text: "NO SE ENCUENTRAN DATOS PARA EL GRAN PREMIO",
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "center",
-            style: {
-              background: "#F34542",
-            },
-            stopOnFocus: true
-          }).showToast();
-          //En el caso de que que el Gran Premio todavía no se corrió, da un mensaje de error con un GIF alusivo y le permite al usuario volver a elegir otra Fecha/Carrera/Circuito
-          Swal.fire({
-            icon: 'error',
-            imageUrl: './assets/img/f1error.gif',
-            imageWidth: 400,
-            imageHeight: 220,
-            imageAlt: 'Custom image',
-            title: 'Lo Siento',
-            text: 'EL GRAN PREMIO SELECCIONADO TODAVIA NO SE HA REALIZADO',
-            confirmButtonText: 'VOLVER'
-          })
-          return; // Salir de la función si el Gran Premio no existe
+    setTimeout(() => {
+      Swal.fire({
+        icon: 'question',
+        title: 'Elegiste el circuito de\n ' + country,
+        text: `¿Confirmas la selección?`,
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No',
+        confirmButtonColor: '#38BA7C',
+        cancelButtonColor: '#F34542',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          tablaDatos.innerHTML = "";//Vacía la tabla cunado elegimos un país nuevo
+          backupCircuito = seleccionado;
+          const mensajeBienvenida = document.getElementById("mensajeBienvenida");
+          mensajeBienvenida.textContent = `Final JS - Comisión 43140 | J. Sebastián Rubio`;
+          selectedRound = parseInt(circuitoInfo[0]);
+          if (selectedRound < 13) {
+            Swal.fire({
+              icon: 'success',
+              title: country,
+              color: '#38BA7C',
+              imageUrl: './assets/posters/' + selectedRound + '.jpg',
+              imageWidth: 256,
+              imageHeight: 384,
+              imageAlt: 'Custom image',
+              text: 'SELECCIONADO CON ÉXITO!',
+            });
+            mostrarImagenPais(parseInt(seleccionado.split(" ")[0]));
+            mostrarSelectorTipo();
+          } else {
+            Toastify({
+              text: "NO SE ENCUENTRAN DATOS PARA EL GRAN PREMIO",
+              duration: 3000,
+              close: true,
+              gravity: "top",
+              position: "center",
+              style: {
+                background: "#F34542",
+              },
+              stopOnFocus: true
+            }).showToast();
+            //En el caso de que que el Gran Premio todavía no se corrió, da un mensaje de error con un GIF alusivo y le permite al usuario volver a elegir otra Fecha/Carrera/Circuito
+            Swal.fire({
+              icon: 'error',
+              imageUrl: './assets/img/f1error.gif',
+              imageWidth: 400,
+              imageHeight: 220,
+              imageAlt: 'Custom image',
+              title: 'Lo Siento',
+              text: 'EL GRAN PREMIO SELECCIONADO TODAVIA NO SE HA REALIZADO',
+              confirmButtonText: 'VOLVER'
+            })
+            return; // Salir de la función si el Gran Premio no existe
+          }
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          nombreCircuitoInput.value = backupCircuito;
         }
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        nombreCircuitoInput.value = backupCircuito;
-      }
-    });
+      });
+    }, 200);
+   
   }
 });
 
@@ -235,33 +239,49 @@ document.getElementById("btnConfirmarTipo").addEventListener("click", function (
 // Función para actualizar la página con un GIF alusivo y reiniciarla
 document.getElementById("botonActualizar").addEventListener("click", actualizarPagina);
 function actualizarPagina() {
-  Swal.fire({
-    icon: 'info',
-    title: 'REINICIANDO APLICACION',
-    text: 'Presione el botón "OK" para Reiniciar la Aplicación',
-    imageUrl: './assets/img/f1reset.gif',
-    imageWidth: 400,
-    imageHeight: 220,
-    imageAlt: 'Custom image',
-  }).then(() => {
-    //Mensaje de espera de 3 segundos que se muestra al usuario notificandole del reinicio de la aplicación
-    Toastify({
-      text: "LA APLICACION SE REINICIARA AUTOMATICAMENTE DESPUES DE 3 SEGUNDOS",
-      duration: 3000,
-      close: true,
-      gravity: "top",
-      position: "center",
-      style: {
-        background: "linear-gradient(to right, #c92e46, #d19627)",
-        color: "white",
-      },
-      stopOnFocus: true
-    }).showToast();
-
-    setTimeout(() => {
-      location.reload();
-    }, 3000);
-  });
+  setTimeout(() => {
+    Swal.fire({
+      icon: 'info',
+      title: 'ESTAS POR REINICIAR LA APLICACION',
+      text: `¿Confirmas la selección?`,
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      confirmButtonColor: '#38BA7C',
+      cancelButtonColor: '#F34542',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+        icon: 'info',
+        title: 'REINICIANDO APLICACION',
+        text: 'Presiona "OK" para continuar con el Reinicio',
+        imageUrl: './assets/img/f1reset.gif',
+        imageWidth: 400,
+        imageHeight: 220,
+        imageAlt: 'Custom image',
+      }).then(() => {
+        //Mensaje de espera de 3 segundos que se muestra al usuario notificandole del reinicio de la aplicación
+        Toastify({
+          text: "LA APLICACION SE REINICIARA AUTOMATICAMENTE DESPUES DE 3 SEGUNDOS",
+          duration: 3000,
+          close: true,
+          gravity: "top",
+          position: "center",
+          style: {
+            background: "linear-gradient(to right, #c92e46, #F34542)",
+            color: "white",
+          },
+          stopOnFocus: true
+        }).showToast();
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
+      });
+      } else {
+        return; // Salir de la función si el Gran Premio no existe
+      }
+    });
+  }, 200);
 }
 // Con esta función se muestra el selector de tipo de tabla que se quiere elegir y el botón de confirmación
 function mostrarSelectorTipo() {
@@ -395,7 +415,9 @@ function cargarDatos(url, isClasificacion) {
           infoPiloto[index].addEventListener("click", () => {
             const pilotoData = data.find(piloto => piloto.driverId === datos[index].Driver.driverId);
             if (pilotoData) {
-              mostrarTarjetaPiloto(pilotoData); // mostrar la CARD PERSONAL
+              setTimeout(() => {
+                mostrarTarjetaPiloto(pilotoData); // muestra la CARD PERSONAL del piloto solicitado
+              }, 200);
             } else {
               console.error(`No se encontró el piloto con driverId ${datos[index].Driver.driverId} en los datos.`);
             }
@@ -415,16 +437,22 @@ function cargarDatos(url, isClasificacion) {
 
         const closeBtn = document.createElement("button");
         closeBtn.classList.add("close-btn");
-        closeBtn.textContent = "CERRAR";
+        closeBtn.innerHTML = "<i class='bx bx-x'></i>&nbsp&nbsp&nbspCERRAR";
         closeBtn.addEventListener("click", () => {
-          overlayContainer.style.display = "none";
-          cardContainer.remove();
+          setTimeout(() => {
+            overlayContainer.style.display = "none";
+            cardContainer.remove();
+          }, 300);
         });
 
         const pilotoImg = document.createElement("img");
         pilotoImg.className = "pilotoImg";
         pilotoImg.src = pilotoData.pic;
         pilotoImg.alt = pilotoData.givenName + " " + pilotoData.familyName;
+
+        const containerImg = document.createElement("p")
+        containerImg.className="containerImg";
+        containerImg.innerHTML = "<img class=containerImg2 src="+pilotoData.pic+"></img>";
 
         const pilotoName = document.createElement("h2");
         pilotoName.innerHTML = "<span class=nombre>"+pilotoData.givenName + " " + pilotoData.familyName+"</span>";
@@ -439,7 +467,14 @@ function cargarDatos(url, isClasificacion) {
 
         const wiki = document.createElement("p");
         wiki.className = "wiki";
-        wiki.innerHTML  = "<a href="+pilotoData.wiki+" target=_blank>Wikipedia</a>";        
+        wiki.innerHTML  = "<a href="+pilotoData.wiki+" target=_blank><i class='bx bxl-wikipedia'></i>Wikipedia</a>";
+        
+        wiki.addEventListener("click", (event) => {
+          event.preventDefault();
+          setTimeout(() => {
+            window.open(pilotoData.wiki, "_blank");
+          }, 300);
+        });
 
         const countryImg = document.createElement("img");
         countryImg.className = "countryImg";
@@ -461,7 +496,8 @@ function cargarDatos(url, isClasificacion) {
         document.body.appendChild(overlayContainer);
         document.body.appendChild(cardContainer);
         cardContainer.appendChild(closeBtn);
-        cardContainer.appendChild(pilotoImg);
+        cardContainer.appendChild(containerImg);
+        // cardContainer.appendChild(pilotoImg);
         cardContainer.appendChild(pilotoName);
         cardContainer.appendChild(pilotoNumber);
         cardContainer.appendChild(helmet);
@@ -470,7 +506,8 @@ function cargarDatos(url, isClasificacion) {
         cardContainer.appendChild(season);
         cardContainer.appendChild(racesWon);
         cardContainer.appendChild(championships);
-        cardContainer.appendChild(wiki)
+        cardContainer.appendChild(wiki);
+        
       }
       //Mensaje de Toastify que se envía cuando se cargan los datos de la Tabla de Clasificación o Carrera según lo que haya elegido el usuario
       Toastify({
