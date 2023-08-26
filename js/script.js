@@ -545,7 +545,7 @@ function cargarDatos(url, isClasificacion) {
         imageHeight: 220,
         imageAlt: 'Custom image',
         title: 'Lo Siento',
-        text: 'EL GRAN PREMIO SELECCIONADO TODAVIA NO SE HA REALIZADO',
+        text: 'AUN NO HAY INFORMACIÓN DISPONIBLE DEL GRAN PREMIO SELECCIONADO',
         confirmButtonText: 'VOLVER'
       }).then(() => {
         return; // Salir de la función si el Gran Premio no existe
