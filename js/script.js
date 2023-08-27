@@ -175,7 +175,7 @@ nombreCircuitoForm.addEventListener("submit", function (event) {
               },
               stopOnFocus: true
             }).showToast();
-            //En el caso de que que el Gran Premio todavía no se corrió, da un mensaje de error con un GIF alusivo y le permite al usuario volver a elegir otra Fecha/Carrera/Circuito
+            //En el caso de que que el Gran Premio todavía no se corrió o no hay información disponible, da un mensaje de error con un GIF alusivo y le permite al usuario volver a elegir otra Fecha/Carrera/Circuito
             Swal.fire({
               icon: 'error',
               imageUrl: './assets/img/f1error.gif',
