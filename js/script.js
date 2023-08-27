@@ -150,7 +150,7 @@ nombreCircuitoForm.addEventListener("submit", function (event) {
           const mensajeBienvenida = document.getElementById("mensajeBienvenida");
           mensajeBienvenida.textContent = `Final JS - Comisión 43140 | J. Sebastián Rubio`;
           selectedRound = parseInt(circuitoInfo[0]);
-          if (selectedRound < 13) {
+          if (selectedRound < 23) {
             Swal.fire({
               icon: 'success',
               title: country,
@@ -183,7 +183,7 @@ nombreCircuitoForm.addEventListener("submit", function (event) {
               imageHeight: 220,
               imageAlt: 'Custom image',
               title: 'Lo Siento',
-              text: 'EL GRAN PREMIO SELECCIONADO TODAVIA NO SE HA REALIZADO',
+              text: 'AUN NO HAY INFORMACIÓN DISPONIBLE DEL GRAN PREMIO SELECCIONADO',
               confirmButtonText: 'VOLVER'
             })
             return; // Salir de la función si el Gran Premio no existe
@@ -545,7 +545,7 @@ function cargarDatos(url, isClasificacion) {
         imageHeight: 220,
         imageAlt: 'Custom image',
         title: 'Lo Siento',
-        text: 'EL GRAN PREMIO SELECCIONADO TODAVIA NO SE HA REALIZADO',
+        text: 'AUN NO HAY INFORMACIÓN DISPONIBLE DEL GRAN PREMIO SELECCIONADO',
         confirmButtonText: 'VOLVER'
       }).then(() => {
         return; // Salir de la función si el Gran Premio no existe
